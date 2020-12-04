@@ -6,7 +6,7 @@ namespace VocabularyBuilderApi.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ItemsController : ControllerBase
     {
         private readonly VocabularyBuilderDbContext dbContext;
