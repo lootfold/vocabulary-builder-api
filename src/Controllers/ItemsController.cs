@@ -21,5 +21,22 @@ namespace VocabularyBuilderApi.Controllers
         {
             return new OkObjectResult(this.dbContext.Items);
         }
+
+        [HttpPost]
+        public IActionResult AddItem([FromBody] Item newItem)
+        {
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
+
+            newItem.Created = DateTime.Now;
+            newItem.Modified = DateTime.Now;
+
+            this.dbContext.Add(newItem);
+            this.dbContext.SaveChanges();
+
+            return new CreatedResult($"api/items/{newItem.Id}", newItem);
+        }
     }
 }
