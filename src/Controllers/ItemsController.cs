@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using VocabularyBuilderApi.Models;
 
@@ -37,6 +38,17 @@ namespace VocabularyBuilderApi.Controllers
             this.dbContext.SaveChanges();
 
             return new CreatedResult($"api/items/{newItem.Id}", newItem);
+        }
+
+        [HttpDelete("{id:int}")]
+        public IActionResult DeleteItem([FromRoute] int id)
+        {
+            var item = this.dbContext.Items.Single(i => i.Id == id);
+
+            this.dbContext.Items.Remove(item);
+            this.dbContext.SaveChanges();
+
+            return new OkResult();
         }
     }
 }
