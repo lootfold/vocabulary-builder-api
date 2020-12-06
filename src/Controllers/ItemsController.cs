@@ -50,5 +50,19 @@ namespace VocabularyBuilderApi.Controllers
 
             return new OkResult();
         }
+
+        [HttpPut("{id:int}")]
+        public IActionResult EditItem([FromRoute] int id, [FromBody] Item item)
+        {
+            var itemInDb = this.dbContext.Items.Single(i => i.Id == id);
+
+            itemInDb.Word = item.Word;
+            itemInDb.Meaning = item.Meaning;
+            itemInDb.Modified = DateTime.Now;
+
+            this.dbContext.SaveChanges();
+
+            return new OkObjectResult(itemInDb);
+        }
     }
 }
