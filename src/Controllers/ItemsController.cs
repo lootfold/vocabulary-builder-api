@@ -20,7 +20,7 @@ namespace VocabularyBuilderApi.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return new OkObjectResult(this.dbContext.Items);
+            return new OkObjectResult(this.dbContext.Items.OrderByDescending(i => i.Modified));
         }
 
         [HttpPost]
