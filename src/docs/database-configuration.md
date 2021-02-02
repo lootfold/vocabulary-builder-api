@@ -42,3 +42,9 @@
   dotnet ef migrations add InitialModel
   dotnet ef database update
   ```
+
+- Note: add following to .bashrc
+  ```
+  export PATH=$PATH:/home/vagrant/.dotnet/tools
+  export DOTNET_ROOT="$(dirname $(which dotnet))"
+  ```
